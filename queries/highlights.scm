@@ -1,13 +1,33 @@
-(field (field_literal (type_literal)) @type parameter: (arg)  description: (description) @type)
-(field (field_literal (rtype_literal)) @type description: (description) @type)
-parameter: (arg) @parameter
-;
-(text) @string
+(text) @string.documentation.python
+(tag_text) @string.documentation.python
 
-(italic_tag (tag_content) @italic)
-(bold_tag (tag_content) @bold)
-(code_tag (tag_content) @code)
-(tag) @comment
+(field
+  (field_literal
+    (type_literal))
+  parameter: (arg)
+  description: (description) @type.python
+  (#set! "priority" 110)
+)
+
+(field
+  (field_literal
+    (rtype_literal))
+  description: (description) @type.python
+  (#set! "priority" 110)
+)
+
+(field
+  (field_literal
+    (raise_literal))
+  parameter: (arg) @type.python
+  (#set! "priority" 110)
+)
+
+parameter: (arg) @variable.python
+
+(italic_tag (tag_content) @markup.italic)
+(bold_tag (tag_content) @markup.strong)
+(named_link (name) @markup.link.label)
+(target) @markup.link
+
 (field_literal) @keyword
-
-(code_tag (tag_content) @injection.content) (#set! injection.language "python")
