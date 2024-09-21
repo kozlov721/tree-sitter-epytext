@@ -1,0 +1,21 @@
+==================
+Code tag
+==================
+
+This is a C{code} text.
+
+---
+
+(epytext
+  (docstring
+    (para
+      (text)))
+  (docstring
+    (para
+      (tag
+        (code_tag
+          (tag_content
+            (tag_text))))))
+  (docstring
+    (para
+      (text))))

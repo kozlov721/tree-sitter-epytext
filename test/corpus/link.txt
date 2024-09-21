@@ -1,0 +1,33 @@
+==================
+Link tag
+==================
+
+This is a U{https://primitive} url and this is a U{named <http://>} url.
+
+---
+
+(epytext
+  (docstring
+    (para
+      (text)))
+  (docstring
+    (para
+      (tag
+        (uri_tag
+          (link
+            (primitive_link
+              (target)))))))
+  (docstring
+    (para
+      (text)))
+  (docstring
+    (para
+      (tag
+        (uri_tag
+          (link
+            (named_link
+              (name)
+              (target)))))))
+  (docstring
+    (para
+      (text))))

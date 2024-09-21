@@ -1,0 +1,21 @@
+==================
+Italic tag
+==================
+
+This is a I{italic} text.
+
+---
+
+(epytext
+  (docstring
+    (para
+      (text)))
+  (docstring
+    (para
+      (tag
+        (italic_tag
+          (tag_content
+            (tag_text))))))
+  (docstring
+    (para
+      (text))))
