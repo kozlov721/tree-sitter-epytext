@@ -1,0 +1,28 @@
+{
+  "name": "tree-sitter-epytext",
+  "version": "1.0.0",
+  "description": "TreeSitter grammar for epytext format for python docstrings",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nan": "^2.20.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.23.0"
+  },
+  "tree-sitter": [
+    {
+      "parser": "tree-sitter-epytext",
+      "source": [
+        "src"
+      ],
+      "module-type": "c",
+      "local": true,
+      "file-types": ["epytext"]
+    }
+  ]
+}
