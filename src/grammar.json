@@ -563,12 +563,8 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "named_link"
-          }
+          "type": "SYMBOL",
+          "name": "named_link"
         },
         {
           "type": "SYMBOL",
@@ -599,7 +595,7 @@
     },
     "name": {
       "type": "PATTERN",
-      "value": "[^<}]+"
+      "value": "[^<}]+\\s+"
     },
     "primitive_link": {
       "type": "SYMBOL",
@@ -607,7 +603,7 @@
     },
     "target": {
       "type": "PATTERN",
-      "value": "[^<>]+"
+      "value": "[^<>}]+"
     },
     "tag_content": {
       "type": "REPEAT1",

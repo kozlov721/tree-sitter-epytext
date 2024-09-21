@@ -99,7 +99,7 @@ module.exports = grammar({
       )
     ),
     link: $ => choice(
-      prec(1, $.named_link),
+      $.named_link,
       $.primitive_link,
     ),
     named_link: $ => seq(
@@ -108,9 +108,10 @@ module.exports = grammar({
       $.target,
       '>',
     ),
-    name: _ => /[^<}]+/,
+    // TODO: This is ugly and incorrect, use scanner.c instead
+    name: _ => /[^<}]+\s+/,
     primitive_link: $ => $.target,
-    target: _ => /[^<>]+/,
+    target: _ => /[^<>}]+/,
     tag_content: $ => repeat1(choice(
       prec(1, $.tag),
       $.tag_text,
