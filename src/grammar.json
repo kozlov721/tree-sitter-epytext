@@ -7,17 +7,8 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "para"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "ulist"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "docstring"
           }
         },
         {
@@ -34,6 +25,15 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "docstring": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "para"
         }
       ]
     },
@@ -60,6 +60,10 @@
     "arg": {
       "type": "PATTERN",
       "value": "[a-zA-Z_][a-zA-Z0-9_]*"
+    },
+    "text": {
+      "type": "PATTERN",
+      "value": "(?:[^@A-Z]|[A-Z][^{])+"
     },
     "field": {
       "type": "SEQ",
@@ -101,17 +105,8 @@
     "description": {
       "type": "REPEAT1",
       "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "para"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "ulist"
-          }
-        ]
+        "type": "SYMBOL",
+        "name": "docstring"
       }
     },
     "attention_literal": {
@@ -564,46 +559,6 @@
         }
       ]
     },
-    "ulist": {
-      "type": "PREC_LEFT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "- "
-          },
-          {
-            "type": "REPEAT1",
-            "content": {
-              "type": "SYMBOL",
-              "name": "li"
-            }
-          }
-        ]
-      }
-    },
-    "li": {
-      "type": "PREC_RIGHT",
-      "value": 2,
-      "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "para"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "ulist"
-            }
-          ]
-        }
-      }
-    },
     "link": {
       "type": "CHOICE",
       "members": [
@@ -829,10 +784,6 @@
           "name": "uri_tag"
         }
       ]
-    },
-    "text": {
-      "type": "PATTERN",
-      "value": "(?:[^@A-Z]|[A-Z][^{])+"
     }
   },
   "extras": [

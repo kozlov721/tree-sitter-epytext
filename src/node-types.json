@@ -53,11 +53,22 @@
       "required": true,
       "types": [
         {
-          "type": "para",
+          "type": "docstring",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "docstring",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
         {
-          "type": "ulist",
+          "type": "para",
           "named": true
         }
       ]
@@ -72,15 +83,11 @@
       "required": false,
       "types": [
         {
+          "type": "docstring",
+          "named": true
+        },
+        {
           "type": "field",
-          "named": true
-        },
-        {
-          "type": "para",
-          "named": true
-        },
-        {
-          "type": "ulist",
           "named": true
         }
       ]
@@ -310,25 +317,6 @@
     "fields": {}
   },
   {
-    "type": "li",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "para",
-          "named": true
-        },
-        {
-          "type": "ulist",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "link",
     "named": true,
     "fields": {},
@@ -534,21 +522,6 @@
     }
   },
   {
-    "type": "ulist",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "li",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "uri_tag",
     "named": true,
     "fields": {},
@@ -575,10 +548,6 @@
   },
   {
     "type": "(c)",
-    "named": false
-  },
-  {
-    "type": "- ",
     "named": false
   },
   {
@@ -627,11 +596,11 @@
   },
   {
     "type": "arg",
-    "named": false
+    "named": true
   },
   {
     "type": "arg",
-    "named": true
+    "named": false
   },
   {
     "type": "attention_literal",

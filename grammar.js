@@ -5,27 +5,25 @@ module.exports = grammar({
   name: 'epytext',
   rules: {
     epytext: $ => seq(
-      repeat(choice(
-        $.para,
-        $.ulist,
-      )),
+      repeat($.docstring),
       optional(repeat($.field)),
+    ),
+    docstring: $ => choice(
+      $.para,
     ),
     para: $ => prec.left(2, repeat1(choice(
       $.tag,
       $.text,
     ))),
     arg: _ => /[a-zA-Z_][a-zA-Z0-9_]*/,
+    text: _ => /(?:[^@A-Z]|[A-Z][^{])+/,
     field: $ => seq(
       $.field_literal,
       field('parameter', optional($.arg)),
       ':',
       field('description', $.description),
     ),
-    description: $ => repeat1(choice(
-      $.para,
-      $.ulist,
-    )),
+    description: $ => repeat1($.docstring),
     attention_literal: _ => 'attention',
     author_literal: _ => 'author',
     bug_literal: _ => 'bug',
@@ -100,11 +98,6 @@ module.exports = grammar({
         $.newfield_literal,
       )
     ),
-    ulist: $ => prec.left(2, seq('- ', repeat1($.li))),
-    li: $ => prec.right(2, repeat1(choice(
-      $.para,
-      $.ulist,
-    ))),
     link: $ => choice(
       prec(1, $.named_link),
       $.primitive_link,
@@ -140,6 +133,5 @@ module.exports = grammar({
       $.link_tag,
       $.uri_tag,
     ),
-    text: _ => /(?:[^@A-Z]|[A-Z][^{])+/,
   }
 })
