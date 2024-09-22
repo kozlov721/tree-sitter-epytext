@@ -8,25 +8,33 @@ module.exports = grammar({
   ],
   rules: {
     epytext: $ => seq(
-      repeat($.docstring),
-      optional(repeat($.field)),
+      optional($.docstring),
+      repeat($.field),
     ),
-    docstring: $ => choice(
-      $.para,
-    ),
-    para: $ => prec.left(2, repeat1(choice(
-      $.tag,
-      $.text,
-    ))),
+    docstring: $ => prec.left(repeat1(
+      choice(
+        $.para,
+        // TODO: implement
+        // $.list,
+        // $.literal_block,
+        // $.doctest_block,
+      ))),
+    para: $ => prec.left(seq(
+      repeat1(choice(
+        $.tag,
+        $.text,
+      )),
+      $._paragraph_break,
+    )),
+    _paragraph_break: _ => /\n{2,}/,
+    text: _ => /(?:[^@A-Z\n]|[A-Z][^{])+/,
     arg: _ => /[a-zA-Z_][a-zA-Z0-9_]*/,
-    text: _ => /(?:[^@A-Z]|[A-Z][^{])+/,
     field: $ => seq(
       $.field_literal,
       field('parameter', optional($.arg)),
       ':',
-      field('description', $.description),
+      field('description', repeat1($.docstring)),
     ),
-    description: $ => repeat1($.docstring),
     attention_literal: _ => 'attention',
     author_literal: _ => 'author',
     bug_literal: _ => 'bug',
@@ -101,20 +109,20 @@ module.exports = grammar({
         $.newfield_literal,
       )
     ),
+
     link: $ => choice(
       $.named_link,
-      $.primitive_link,
+      $.primitive_link
     ),
-    named_link: $ => seq(
-      $.name,
+
+    primitive_link: _ => /[^}]+/,
+
+    named_link: _ => seq(
+      field('name', /[^<}]+/),
       '<',
-      $.target,
-      '>',
+      field('url', /[^}]+/)
     ),
-    // TODO: This is ugly and incorrect, use scanner.c instead
-    name: _ => /[^<}]+\s+/,
-    primitive_link: $ => $.target,
-    target: _ => /[^<>}]+/,
+
     tag_content: $ => repeat1(choice(
       prec(1, $.tag),
       $.tag_text,
