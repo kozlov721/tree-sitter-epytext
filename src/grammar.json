@@ -638,7 +638,41 @@
         },
         {
           "type": "SYMBOL",
-          "name": "tag_content"
+          "name": "code_content"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "symbol_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "S{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tag_text"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "graph_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "G{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tag_text"
         },
         {
           "type": "STRING",
@@ -778,6 +812,14 @@
         {
           "type": "SYMBOL",
           "name": "uri_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "symbol_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "graph_tag"
         }
       ]
     }
@@ -790,7 +832,12 @@
   ],
   "conflicts": [],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "code_content"
+    }
+  ],
   "inline": [],
   "supertypes": []
 }

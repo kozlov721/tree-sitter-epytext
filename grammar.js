@@ -3,6 +3,9 @@
 
 module.exports = grammar({
   name: 'epytext',
+  externals: $ => [
+    $.code_content
+  ],
   rules: {
     epytext: $ => seq(
       repeat($.docstring),
@@ -117,7 +120,9 @@ module.exports = grammar({
       $.tag_text,
     )),
     tag_text: _ => /[^{}]+/,
-    code_tag: $ => seq('C{', $.tag_content, '}'),
+    code_tag: $ => seq('C{', $.code_content, '}'),
+    symbol_tag: $ => seq('S{', $.tag_text, '}'),
+    graph_tag: $ => seq('G{', $.tag_text, '}'),
     math_tag: $ => seq('M{', $.tag_content, '}'),
     italic_tag: $ => seq('I{', $.tag_content, '}'),
     bold_tag: $ => seq('B{', $.tag_content, '}'),
@@ -133,6 +138,8 @@ module.exports = grammar({
       $.indexed_tag,
       $.link_tag,
       $.uri_tag,
+      $.symbol_tag,
+      $.graph_tag,
     ),
   }
 })
