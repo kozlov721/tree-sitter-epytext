@@ -12,7 +12,7 @@
 #define LEXER_MARK_END (lexer->mark_end(lexer))
 #define PRINT_LOOKAHEAD (printf("%c\n", lexer->lookahead))
 
-enum TokenType { CODE_CONTENT, TAG_TEXT };
+enum TokenType { CODE_CONTENT, TAG_TEXT, END_OF_FILE };
 
 void *tree_sitter_epytext_external_scanner_create() {
     return NULL;
@@ -103,6 +103,14 @@ bool tree_sitter_epytext_external_scanner_scan(
         return parse_tag_text(lexer);
     } else if (valid_symbols[CODE_CONTENT]) {
         return parse_code_content(lexer);
+    } else if (valid_symbols[END_OF_FILE]) {
+        LEXER_MARK_END;
+        LEXER_ADVANCE;
+        if (lexer->eof(lexer)) {
+            lexer->result_symbol = END_OF_FILE;
+            return true;
+        }
+        return false;
     } else {
         return false;
     }

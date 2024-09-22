@@ -6,6 +6,7 @@ module.exports = grammar({
   externals: $ => [
     $.code_content,
     $.tag_text,
+    $.end_of_file,
   ],
   rules: {
     epytext: $ => seq(
@@ -25,9 +26,9 @@ module.exports = grammar({
         $.tag,
         $.text,
       )),
-      $._paragraph_break,
+      $.paragraph_break,
     )),
-    _paragraph_break: _ => /\n{2,}/,
+    paragraph_break: $ => choice(/\n{2,}/, $.end_of_file),
     text: _ => /(?:[^@A-Z\n]|[A-Z][^{])+/,
     arg: _ => /[a-zA-Z_][a-zA-Z0-9_]*/,
     field: $ => seq(

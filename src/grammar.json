@@ -65,14 +65,23 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_paragraph_break"
+            "name": "paragraph_break"
           }
         ]
       }
     },
-    "_paragraph_break": {
-      "type": "PATTERN",
-      "value": "\\n{2,}"
+    "paragraph_break": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\n{2,}"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "end_of_file"
+        }
+      ]
     },
     "text": {
       "type": "PATTERN",
@@ -849,6 +858,10 @@
     {
       "type": "SYMBOL",
       "name": "tag_text"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "end_of_file"
     }
   ],
   "inline": [],
