@@ -2,50 +2,56 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-enum TokenType {
-  CODE_CONTENT
-};
+enum TokenType { CODE_CONTENT };
 
 void *tree_sitter_epytext_external_scanner_create() {
-  return NULL;
+    return NULL;
 }
 
 void tree_sitter_epytext_external_scanner_destroy(void *payload) {
-  // No state to free
+    // No state to free
 }
 
-unsigned tree_sitter_epytext_external_scanner_serialize(void *payload, char *buffer) {
-  return 0; // No state to serialize
+unsigned tree_sitter_epytext_external_scanner_serialize(
+        void *payload, char *buffer) {
+    return 0; // No state to serialize
 }
 
-void tree_sitter_epytext_external_scanner_deserialize(void *payload, const char *buffer, unsigned length) {
-  // No state to deserialize
+void tree_sitter_epytext_external_scanner_deserialize(
+        void *payload, const char *buffer, unsigned length) {
+    // No state to deserialize
 }
 
-bool tree_sitter_epytext_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
-  if (!valid_symbols[CODE_CONTENT]) return false;
+bool _parse_code(void *payload, TSLexer *lexer) {
+    unsigned int brace_nesting = 1;
 
-  unsigned int brace_nesting = 1; // Starting from the initial '{' after 'C'
+    while (true) {
+        if (lexer->eof(lexer)) {
+            return false;
+        }
 
-  while (true) {
-    if (lexer->eof(lexer)) {
-      return false; // Unexpected EOF
+        if (lexer->lookahead == '{') {
+            brace_nesting++;
+            lexer->advance(lexer, false);
+        } else if (lexer->lookahead == '}') {
+            brace_nesting--;
+            if (brace_nesting == 0) {
+                lexer->result_symbol = CODE_CONTENT;
+                return true;
+            }
+            lexer->advance(lexer, false);
+        } else {
+            lexer->advance(lexer, false);
+        }
+        lexer->mark_end(lexer);
     }
+}
 
-    if (lexer->lookahead == '{') {
-      brace_nesting++;
-      lexer->advance(lexer, false);
-    } else if (lexer->lookahead == '}') {
-      brace_nesting--;
-      if (brace_nesting == 0) {
-        // Do not consume this closing '}'
-        lexer->result_symbol = CODE_CONTENT;
-        return true;
-      }
-      lexer->advance(lexer, false);
+bool tree_sitter_epytext_external_scanner_scan(
+        void *payload, TSLexer *lexer, const bool *valid_symbols) {
+    if (valid_symbols[CODE_CONTENT]) {
+        return _parse_code(payload, lexer);
     } else {
-      lexer->advance(lexer, false);
+        return false;
     }
-    lexer->mark_end(lexer); // Update the end position of the token
-  }
 }
