@@ -336,6 +336,11 @@
     }
   },
   {
+    "type": "link_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "link_tag",
     "named": true,
     "fields": {},
@@ -368,7 +373,21 @@
   {
     "type": "named_link",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "link_name",
+          "named": true
+        },
+        {
+          "type": "link_url",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "organization_literal",
@@ -558,6 +577,10 @@
     "named": false
   },
   {
+    "type": ">",
+    "named": false
+  },
+  {
     "type": "@",
     "named": false
   },
@@ -687,6 +710,10 @@
   },
   {
     "type": "license_literal",
+    "named": true
+  },
+  {
+    "type": "link_url",
     "named": true
   },
   {

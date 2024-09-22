@@ -5,14 +5,14 @@
   (field_literal
     (type_literal))
   parameter: (arg)
-  description: (description) @type
+  description: (docstring) @type
   (#set! "priority" 110)
 )
 
 (field
   (field_literal
     (rtype_literal))
-  description: (description) @type
+  description: (docstring) @type
   (#set! "priority" 110)
 )
 
@@ -27,7 +27,8 @@ parameter: (arg) @variable
 
 (italic_tag (tag_content) @markup.italic)
 (bold_tag (tag_content) @markup.strong)
-(named_link (name) @markup.link.label)
-(target) @markup.link
+(link_name) @markup.link.label
+(primitive_link) @markup.link
+(link_url) @markup.link
 
 (field_literal) @keyword

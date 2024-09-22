@@ -587,30 +587,34 @@
     },
     "primitive_link": {
       "type": "PATTERN",
-      "value": "[^}]+"
+      "value": "[^<}]+"
+    },
+    "link_name": {
+      "type": "PATTERN",
+      "value": "[^<}]+"
+    },
+    "link_url": {
+      "type": "PATTERN",
+      "value": "[^>]+"
     },
     "named_link": {
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "PATTERN",
-            "value": "[^<}]+"
-          }
+          "type": "SYMBOL",
+          "name": "link_name"
         },
         {
           "type": "STRING",
           "value": "<"
         },
         {
-          "type": "FIELD",
-          "name": "url",
-          "content": {
-            "type": "PATTERN",
-            "value": "[^}]+"
-          }
+          "type": "SYMBOL",
+          "name": "link_url"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
         }
       ]
     },

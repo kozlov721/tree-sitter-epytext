@@ -115,12 +115,15 @@ module.exports = grammar({
       $.primitive_link
     ),
 
-    primitive_link: _ => /[^}]+/,
+    primitive_link: _ => /[^<}]+/,
+    link_name: _ => /[^<}]+/,
+    link_url: _ => /[^>]+/,
 
-    named_link: _ => seq(
-      field('name', /[^<}]+/),
+    named_link: $ => seq(
+      $.link_name,
       '<',
-      field('url', /[^}]+/)
+      $.link_url,
+      '>'
     ),
 
     tag_content: $ => repeat1(choice(
