@@ -1,0 +1,124 @@
+This is an example epytext file.
+
+Lists
+=========
+  Unordered List
+  -----------
+    This is an unordered list:
+      - This is a first item
+      - This is a second item
+
+  Ordered Lists
+  -----------
+    This is an ordered list:
+      1. This is a first item
+      2. This is a second item
+        2.1. This is a sublist for the second item
+
+Literal Block
+=========
+
+  This is a literal block::
+
+    Literal \
+             \
+              \ Block
+
+  This sentence is not part of the above literal block
+
+Doctest Block
+=========
+
+  The following is a doctest block:
+
+    >>> def factorial(n: int):
+    ...     if n in [0, 1]:
+    ...         return 1
+    ...     return n * factorial(n - 1)
+    >>> factorial(0)
+    1
+    >>> factorial(3)
+    6
+
+  The above was an example of a doctest block.
+
+Tags
+=========
+
+  Basic Markup Tags
+  -----------
+
+  I{This is an italic text}
+
+  B{This is a bold text}
+
+  C{print("This is a code")}
+
+  M{m * x + b}
+
+  Tags can be nested: I{B{This is a bold italic text}}
+
+  And span multiple lines:
+
+  C{
+    def factorial(n: int):
+        if n in [0, 1]:
+            return 1
+        return n * factorial(n - 1)
+  }
+
+  URLs
+  -----------
+
+  U{https://this-is-a-primitive-url}
+
+  U{this <https://is-a-named-url>}
+
+  Documentation Cross-References
+  -----------
+
+  L{ThisIsAPrimitiveCodeLink}
+
+  L{This is a named code link <NamedCodeLink>}
+
+  Index
+  -----------
+
+  X{Index Term}
+
+  Symbols
+  -----------
+  S{sum}S{alpha}/x S{<=} S{beta}
+
+
+Fields
+=========
+
+  @type n: int
+  @param n: A natural positive number
+
+  @rtype: int
+  @return: The result
+
+  @raises ValueError: If n is negative.
+
+  @note: Fields can contain multiple paragraphs.
+
+    Fields can also contain lists:
+      - This is a first item
+      - This is a second item
+
+    Literal blocks are also allowed::
+
+      This is a literal block
+
+    As well as doctest blocks:
+
+      >>> def factorial(n: int):
+      ...     if n in [0, 1]:
+      ...         return 1
+      ...     return n * factorial(n - 1)
+      >>> factorial(0)
+      1
+      >>> factorial(3)
+      6
