@@ -624,12 +624,8 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "PREC",
-            "value": 1,
-            "content": {
-              "type": "SYMBOL",
-              "name": "tag"
-            }
+            "type": "SYMBOL",
+            "name": "tag"
           },
           {
             "type": "SYMBOL",
@@ -638,9 +634,39 @@
         ]
       }
     },
-    "tag_text": {
-      "type": "PATTERN",
-      "value": "[^{}]+"
+    "italic_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "I{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tag_content"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "bold_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "B{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tag_content"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
     },
     "code_tag": {
       "type": "SEQ",
@@ -652,6 +678,23 @@
         {
           "type": "SYMBOL",
           "name": "code_content"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "math_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "M{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tag_content"
         },
         {
           "type": "STRING",
@@ -686,57 +729,6 @@
         {
           "type": "SYMBOL",
           "name": "tag_text"
-        },
-        {
-          "type": "STRING",
-          "value": "}"
-        }
-      ]
-    },
-    "math_tag": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "M{"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "tag_content"
-        },
-        {
-          "type": "STRING",
-          "value": "}"
-        }
-      ]
-    },
-    "italic_tag": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "I{"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "tag_content"
-        },
-        {
-          "type": "STRING",
-          "value": "}"
-        }
-      ]
-    },
-    "bold_tag": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "B{"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "tag_content"
         },
         {
           "type": "STRING",
@@ -796,45 +788,49 @@
       ]
     },
     "tag": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "code_tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "math_tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "italic_tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "bold_tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "indexed_tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "link_tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "uri_tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "symbol_tag"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "graph_tag"
-        }
-      ]
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "italic_tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "bold_tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "code_tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "math_tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "indexed_tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "link_tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "uri_tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "symbol_tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "graph_tag"
+          }
+        ]
+      }
     }
   },
   "extras": [
@@ -849,6 +845,10 @@
     {
       "type": "SYMBOL",
       "name": "code_content"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "tag_text"
     }
   ],
   "inline": [],

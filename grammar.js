@@ -4,7 +4,8 @@
 module.exports = grammar({
   name: 'epytext',
   externals: $ => [
-    $.code_content
+    $.code_content,
+    $.tag_text,
   ],
   rules: {
     epytext: $ => seq(
@@ -127,30 +128,29 @@ module.exports = grammar({
     ),
 
     tag_content: $ => repeat1(choice(
-      prec(1, $.tag),
+      $.tag,
       $.tag_text,
     )),
-    tag_text: _ => /[^{}]+/,
-    code_tag: $ => seq('C{', $.code_content, '}'),
-    symbol_tag: $ => seq('S{', $.tag_text, '}'),
-    graph_tag: $ => seq('G{', $.tag_text, '}'),
-    math_tag: $ => seq('M{', $.tag_content, '}'),
     italic_tag: $ => seq('I{', $.tag_content, '}'),
     bold_tag: $ => seq('B{', $.tag_content, '}'),
+    code_tag: $ => seq('C{', $.code_content, '}'),
+    math_tag: $ => seq('M{', $.tag_content, '}'),
+    symbol_tag: $ => seq('S{', $.tag_text, '}'),
+    graph_tag: $ => seq('G{', $.tag_text, '}'),
     indexed_tag: $ => seq('X{', $.tag_content, '}'),
     link_tag: $ => seq('L{', $.link, '}'),
     uri_tag: $ => seq('U{', $.link, '}'),
 
-    tag: $ => choice(
-      $.code_tag,
-      $.math_tag,
+    tag: $ => prec(1, choice(
       $.italic_tag,
       $.bold_tag,
+      $.code_tag,
+      $.math_tag,
       $.indexed_tag,
       $.link_tag,
       $.uri_tag,
       $.symbol_tag,
       $.graph_tag,
-    ),
+    )),
   }
 })
