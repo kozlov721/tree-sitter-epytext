@@ -9,13 +9,11 @@ This is a B{bold} text.
 (epytext
   (docstring
     (para
-      (text)))
-  (docstring
-    (para
+      (text)
       (tag
         (bold_tag
           (tag_content
-            (tag_text))))))
-  (docstring
-    (para
-      (text))))
+            (tag_text))))
+      (text)
+      (paragraph_break
+        (end_of_file)))))

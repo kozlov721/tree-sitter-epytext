@@ -9,25 +9,18 @@ This is a U{https://primitive} url and this is a U{named <http://>} url.
 (epytext
   (docstring
     (para
-      (text)))
-  (docstring
-    (para
+      (text)
       (tag
         (uri_tag
           (link
-            (primitive_link
-              (target)))))))
-  (docstring
-    (para
-      (text)))
-  (docstring
-    (para
+            (primitive_link))))
+      (text)
       (tag
         (uri_tag
           (link
             (named_link
-              (name)
-              (target)))))))
-  (docstring
-    (para
-      (text))))
+              (link_name)
+              (link_url)))))
+      (text)
+      (paragraph_break
+        (end_of_file)))))

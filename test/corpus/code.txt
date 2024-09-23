@@ -9,13 +9,10 @@ This is a C{code} text.
 (epytext
   (docstring
     (para
-      (text)))
-  (docstring
-    (para
+      (text)
       (tag
         (code_tag
-          (tag_content
-            (tag_text))))))
-  (docstring
-    (para
-      (text))))
+          (code_content)))
+      (text)
+      (paragraph_break
+        (end_of_file)))))
